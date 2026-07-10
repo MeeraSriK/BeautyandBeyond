@@ -6,14 +6,14 @@ import { getRequestOrigin } from "@/lib/origin.functions";
 import { ThreadSpine } from "@/components/ThreadSpine";
 import { ChatWidget } from "@/components/ChatWidget";
 import { VapiWidget } from "@/components/VapiWidget";
-import logoAsset from "@/assets/logo.png.asset.json";
-import studio1 from "@/assets/studio-1.jpg.asset.json";
-import studio2 from "@/assets/studio-2.jpg.asset.json";
-import studio3 from "@/assets/studio-3.jpg.asset.json";
-import studio4 from "@/assets/studio-4.jpg.asset.json";
-import studio5 from "@/assets/studio-5.jpg.asset.json";
-import studio6 from "@/assets/studio-6.jpg.asset.json";
-import studio7 from "@/assets/studio-7.jpg.asset.json";
+import logoAsset from "@/assets/gallery/logo.png";
+import studio1 from "@/assets/gallery/studio-1.jpg";
+import studio2 from "@/assets/gallery/studio-2.jpg";
+import studio3 from "@/assets/gallery/studio-3.jpg";
+import studio4 from "@/assets/gallery/studio-4.jpg";
+import studio5 from "@/assets/gallery/studio-5.jpg";
+import studio6 from "@/assets/gallery/studio-6.jpg";
+import studio7 from "@/assets/gallery/studio-7.jpg";
 
 const STUDIO_PHOTOS = [studio1, studio2, studio3, studio4, studio5, studio6, studio7];
 
@@ -30,8 +30,8 @@ function StudioCarousel() {
       <div className="absolute inset-0 overflow-hidden">
         {STUDIO_PHOTOS.map((p, idx) => (
           <img
-            key={p.asset_id}
-            src={p.url}
+            key={idx}
+            src={p}
             alt={`Studio photo ${idx + 1}`}
             className="absolute inset-0 w-full h-full object-cover transition-opacity duration-700"
             style={{ opacity: idx === i ? 1 : 0 }}
@@ -362,7 +362,7 @@ function Nav() {
       <div className="mx-auto max-w-6xl px-4 sm:px-5 md:px-8 py-3 sm:py-4 grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 sm:gap-4">
         <a href="#top" className="flex items-center gap-2 sm:gap-3 min-w-0">
           <img
-            src={logoAsset.url}
+            src={logoAsset}
             alt="Beauty & Beyond by Sonia logo"
             className="w-9 h-9 sm:w-10 sm:h-10 rounded-full object-cover shrink-0"
           />
