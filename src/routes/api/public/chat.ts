@@ -1,0 +1,10 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { handleChatPost } from "@/lib/chat-handler.server";
+
+export const Route = createFileRoute("/api/public/chat")({
+  server: {
+    handlers: {
+      POST: async ({ request }) => handleChatPost(request),
+    },
+  },
+});

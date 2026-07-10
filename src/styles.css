@@ -1,0 +1,246 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: 2px;
+  --radius-md: 6px;
+  --radius-lg: 14px;
+  --radius-xl: 28px;
+
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --color-card: var(--paper);
+  --color-card-foreground: var(--ink);
+  --color-primary: var(--ink);
+  --color-primary-foreground: var(--paper);
+  --color-secondary: var(--paper-2);
+  --color-secondary-foreground: var(--ink);
+  --color-muted: var(--paper-2);
+  --color-muted-foreground: color-mix(in oklab, var(--ink) 60%, transparent);
+  --color-accent: var(--marigold);
+  --color-accent-foreground: var(--ink);
+  --color-destructive: oklch(0.55 0.2 25);
+  --color-border: color-mix(in oklab, var(--ink) 20%, transparent);
+  --color-input: color-mix(in oklab, var(--ink) 20%, transparent);
+  --color-ring: var(--magenta);
+
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-plum: var(--plum);
+  --color-marigold: var(--marigold);
+  --color-magenta: var(--magenta);
+  --color-pistachio: var(--pistachio);
+  --color-blush: var(--blush);
+  /* backwards-compat aliases so ThreadSpine/ChatWidget keep rendering */
+  --color-linen: var(--paper);
+  --color-linen-2: var(--paper-2);
+  --color-thread: var(--magenta);
+  --color-ochre: var(--marigold);
+  --color-moss: var(--pistachio);
+
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 4px;
+
+  /* Girly beauty studio palette — soft blush, champagne, rose gold, warm cocoa */
+  --ink: oklch(0.35 0.05 30);           /* warm cocoa text */
+  --paper: oklch(0.985 0.015 55);       /* champagne cream */
+  --paper-2: oklch(0.96 0.025 45);     /* deeper blush cream */
+  --plum: oklch(0.32 0.08 340);         /* deep romantic plum for dark sections */
+  --marigold: oklch(0.72 0.13 60);      /* rose gold accent */
+  --magenta: oklch(0.74 0.14 355);     /* ballet pink */
+  --pistachio: oklch(0.62 0.06 150);   /* sage whisper */
+  --blush: oklch(0.94 0.035 15);        /* pale petal pink */
+
+  --linen: var(--paper);
+  --linen-2: var(--paper-2);
+  --thread: var(--magenta);
+  --ochre: var(--marigold);
+  --moss: var(--pistachio);
+}
+
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(circle at 15% 5%, color-mix(in oklab, var(--marigold) 14%, transparent) 0%, transparent 45%),
+      radial-gradient(circle at 90% 95%, color-mix(in oklab, var(--plum) 10%, transparent) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+  ::selection { background: var(--marigold); color: var(--ink); }
+  :focus-visible {
+    outline: 1px solid var(--marigold);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.02em;
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 30, "opsz" 144;
+  letter-spacing: -0.022em;
+}
+@utility font-serif-italic {
+  font-family: var(--font-serif);
+  font-style: italic;
+  letter-spacing: -0.005em;
+}
+@utility font-mono-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+@utility text-balance { text-wrap: balance; }
+@utility ledger-row { border-top: 1px solid color-mix(in oklab, currentColor 22%, transparent); }
+
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px currentColor;
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  }
+}
+
+/* Refined couture label — thin gold border, no rotation */
+@utility sticker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--marigold);
+  border: 1px solid color-mix(in oklab, var(--marigold) 65%, transparent);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  box-shadow: none;
+  transform: none;
+}
+@utility sticker-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--marigold);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+}
+
+/* Fine gold underline — no wobble */
+@utility wavy {
+  background-image: linear-gradient(var(--marigold), var(--marigold));
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  padding-bottom: 0.1em;
+  text-decoration: none;
+}
+
+@keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes chat-in { from { opacity: 0; transform: translateY(12px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes pulse-thread {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--magenta) 60%, transparent); }
+  50% { box-shadow: 0 0 0 12px color-mix(in oklab, var(--magenta) 0%, transparent); }
+}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes bloom-spin { to { transform: rotate(360deg); } }
+
+/* Blooming rose entrance: petals scale out from centre.
+   `transform-box: fill-box` on animated groups (below) is required so CSS
+   transforms on <g> use the group's own bounding box as the origin instead
+   of the SVG viewport (0,0) — otherwise the entrance scales from the corner
+   and swings out of view, making the animation appear "not to play". */
+@keyframes bloom-open {
+  0% { opacity: 0; transform: scale(0.15) rotate(-6deg); }
+  40% { opacity: 1; }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+@keyframes bloom-open-soft {
+  0% { opacity: 0; transform: scale(0.35); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes bloom-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+@keyframes bloom-sway {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+
+@utility animate-fade-up { animation: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@utility animate-chat-in { animation: chat-in 0.25s ease-out both; }
+@utility animate-pulse-thread { animation: pulse-thread 2s ease-in-out infinite; }
+@utility animate-marquee { animation: marquee 34s linear infinite; }
+@utility animate-bloom-spin { animation: bloom-spin 60s linear infinite; }
+
+/* Every animated bloom part scales from its own centre and stays on the GPU */
+[class*="animate-bloom-"] {
+  transform-box: fill-box;
+  transform-origin: center;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+@utility animate-bloom-leaf   { animation: bloom-open-soft 1.4s cubic-bezier(0.22, 1, 0.36, 1) both, bloom-sway 9s ease-in-out 1.4s infinite; }
+@utility animate-bloom-sepal  { animation: bloom-open 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+@utility animate-bloom-outer  { animation: bloom-open 1.3s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both, bloom-breathe 8s ease-in-out 1.6s infinite; }
+@utility animate-bloom-mid    { animation: bloom-open 1.2s cubic-bezier(0.22, 1, 0.36, 1) 0.55s both, bloom-breathe 8s ease-in-out 1.9s infinite; }
+@utility animate-bloom-inner  { animation: bloom-open 1.1s cubic-bezier(0.22, 1, 0.36, 1) 0.8s both; }
+@utility animate-bloom-center { animation: bloom-open 1s cubic-bezier(0.22, 1, 0.36, 1) 1s both, bloom-breathe 7s ease-in-out 2s infinite; }
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
